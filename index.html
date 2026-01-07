@@ -6,7 +6,6 @@
 <title>Mohamad Sabil Firmansyah</title>
 
 <style>
-/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -14,30 +13,21 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-/* ===== BODY ===== */
 body {
   background: #f5f7fa;
   color: #222;
-  line-height: 1.6;
 }
 
-/* ===== NAVBAR ===== */
 nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: #ffffff;
+  background: #fff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   padding: 12px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
-}
-
-nav .logo {
-  font-weight: 700;
-  font-size: 18px;
 }
 
 nav ul {
@@ -46,61 +36,36 @@ nav ul {
   gap: 20px;
 }
 
-nav ul li a {
+nav a {
   text-decoration: none;
   color: #333;
   padding: 8px 14px;
   border-radius: 6px;
-  position: relative;
-  overflow: hidden;
+  cursor: pointer;
   transition: background 0.3s;
 }
 
-/* Efek tekstur / klik */
-nav ul li a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(0,0,0,0.15) 10%, transparent 10%);
-  transform: scale(0);
-  transition: transform 0.4s;
-}
-
-nav ul li a:hover::after {
-  transform: scale(2);
-}
-
-nav ul li a:hover {
+nav a:hover {
   background: #eaeef3;
 }
 
-/* ===== SECTION ===== */
 section {
-  padding: 90px 30px;
+  padding: 100px 30px;
   max-width: 900px;
   margin: auto;
 }
 
-h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-h2 {
-  margin-bottom: 10px;
-  color: #1a4ed8;
-}
-
-/* ===== CARD ===== */
 .card {
   background: #fff;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  margin-top: 20px;
 }
 
-/* ===== FOOTER ===== */
+h1, h2 {
+  margin-bottom: 10px;
+}
+
 footer {
   text-align: center;
   padding: 20px;
@@ -111,6 +76,84 @@ footer {
 </head>
 
 <body>
+
+<nav>
+  <strong>Sabil</strong>
+  <ul>
+    <li><a onclick="showInfo()">Info</a></li>
+    <li><a onclick="showLayanan()">Layanan</a></li>
+    <li><a onclick="showLokasi()">Lokasi</a></li>
+  </ul>
+</nav>
+
+<section>
+  <div id="content" class="card">
+    <h1>Mohamad Sabil Firmansyah</h1>
+    <p><strong>Pelajar SMA Negeri 1 Cluring</strong></p>
+    <p>Banyuwangi, Jawa Timur, Indonesia</p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Mohamad Sabil Firmansyah
+</footer>
+
+<script>
+function showInfo() {
+  document.getElementById("content").innerHTML = `
+    <h2>Profil Singkat</h2>
+    <p>
+      Mohamad Sabil Firmansyah adalah pelajar SMA Negeri 1 Cluring
+      dengan minat pada pembelajaran, penulisan, dan dokumentasi digital.
+    </p>
+  `;
+}
+
+function showLayanan() {
+  document.getElementById("content").innerHTML = `
+    <h2>Layanan</h2>
+    <ul>
+      <li>📘 Dokumentasi kegiatan sekolah</li>
+      <li>✍️ Penulisan tugas & rangkuman</li>
+      <li>💻 Website bio & portofolio pelajar</li>
+      <li>📂 Arsip pembelajaran digital</li>
+    </ul>
+  `;
+}
+
+function showLokasi() {
+  const content = document.getElementById("content");
+  content.innerHTML = "<p>📍 Mengambil lokasi terkini...</p>";
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        content.innerHTML = `
+          <h2>Lokasi Terkini</h2>
+          <p>Latitude: ${lat}</p>
+          <p>Longitude: ${lon}</p>
+          <p>
+            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">
+              Buka di Google Maps
+            </a>
+          </p>
+        `;
+      },
+      function() {
+        content.innerHTML = "<p>❌ Izin lokasi ditolak.</p>";
+      }
+    );
+  } else {
+    content.innerHTML = "<p>Browser tidak mendukung lokasi.</p>";
+  }
+}
+</script>
+
+</body>
+</html><body>
 
 <nav>
   <div class="logo">Sabil</div>
